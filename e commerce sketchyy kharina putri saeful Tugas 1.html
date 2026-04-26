@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sketchyy | Art Supplies</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#FCFFF9;  /* Ceramic - warna latar baru */
+color:#4a3728;       /* Dark brown tone for text */
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+/* HEADER */
+
+header{
+background:#FFFFFF;
+box-shadow:0 4px 12px rgba(0,0,0,0.03);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.header-flex{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+color:#81654F;  /* Coklat kode sesuai permintaan */
+}
+
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+nav a{
+text-decoration:none;
+color:#4a3728;
+font-weight:500;
+cursor:pointer;
+transition:color 0.2s;
+}
+
+nav a:hover{
+color:#81654F;
+}
+
+.cart-icon{
+background:#f3efe8;
+padding:8px 14px;
+border-radius:20px;
+cursor:pointer;
+position:relative;
+transition:0.2s;
+}
+
+.cart-icon:hover{
+background:#e8e0d6;
+color:#81654F;
+}
+
+/* HERO - warna merino #F2EBDD */
+.hero{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+align-items:center;
+background:#F2EBDD;  /* Merino color */
+padding:40px;
+border-radius:25px;
+margin-top:20px;
+}
+
+.hero-content{
+flex:1;
+}
+
+.hero h1{
+font-size:36px;
+margin-bottom:15px;
+color:#81654F;  /* Coklat */
+}
+
+.hero p{
+margin-bottom:20px;
+color:#5c4b38;
+font-weight:500;
+}
+
+.btn-primary{
+background:#81654F;  /* Coklat */
+color:white;
+padding:12px 26px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-weight:600;
+transition:0.2s;
+}
+
+.btn-primary:hover{
+background:#694e3b;
+transform:scale(1.02);
+}
+
+.hero-img{
+max-width:350px;
+width:100%;
+border-radius:20px;
+object-fit:cover;
+}
+
+/* PRODUCTS */
+
+.section-title{
+font-size:24px;
+margin:40px 0 20px;
+border-left:5px solid #81654F;
+padding-left:10px;
+color:#5a3e2c;
+}
+
+.product-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.product-card{
+background:white;  /* Kotak produk tetap putih */
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.06);
+overflow:hidden;
+transition:0.2s;
+}
+
+.product-card:hover{
+transform:translateY(-5px);
+box-shadow:0 12px 28px rgba(0,0,0,0.1);
+}
+
+.product-img{
+width:100%;
+height:200px;
+object-fit:cover;
+background:#fafaf5;
+}
+
+.product-info{
+padding:15px;
+}
+
+.product-name{
+font-weight:700;
+margin-bottom:5px;
+font-size:18px;
+color:#2d241a;
+}
+
+.product-price{
+color:#81654F;  /* Coklat untuk harga */
+font-weight:700;
+margin:10px 0;
+font-size:20px;
+}
+
+.btn-cart{
+width:100%;
+padding:10px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+background:#f4efe9;
+font-weight:600;
+transition:0.2s;
+color:#4a2e1e;
+}
+
+.btn-cart:hover{
+background:#81654F;
+color:white;
+}
+
+/* MODAL CART */
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:1000;
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:white;
+border-radius:20px;
+max-width:500px;
+width:90%;
+max-height:80vh;
+overflow-y:auto;
+animation:slideIn 0.3s ease;
+}
+
+@keyframes slideIn{
+from{
+transform:translateY(-50px);
+opacity:0;
+}
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+.modal-header{
+padding:20px;
+border-bottom:1px solid #e5e7eb;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.modal-header h3{
+font-size:22px;
+color:#81654F;
+}
+
+.close-modal{
+background:none;
+border:none;
+font-size:28px;
+cursor:pointer;
+color:#9ca3af;
+}
+
+.close-modal:hover{
+color:#81654F;
+}
+
+.modal-body{
+padding:20px;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 0;
+border-bottom:1px solid #f3f4f6;
+flex-wrap:wrap;
+}
+
+.cart-item-info{
+flex:2;
+}
+
+.cart-item-name{
+font-weight:600;
+color:#2d241a;
+}
+
+.cart-item-price{
+color:#81654F;
+font-size:14px;
+font-weight:500;
+}
+
+.cart-item-qty{
+display:flex;
+align-items:center;
+gap:10px;
+margin:0 15px;
+}
+
+.qty-btn{
+background:#f3ede7;
+border:none;
+width:28px;
+height:28px;
+border-radius:50%;
+cursor:pointer;
+font-weight:bold;
+color:#4a2e1e;
+}
+
+.qty-btn:hover{
+background:#e2d5ca;
+}
+
+.cart-item-subtotal{
+font-weight:700;
+color:#81654F;
+min-width:100px;
+text-align:right;
+}
+
+.delete-item{
+background:#fee2e2;
+border:none;
+color:#dc2626;
+padding:5px 10px;
+border-radius:10px;
+cursor:pointer;
+margin-left:10px;
+font-size:12px;
+}
+
+.delete-item:hover{
+background:#fecaca;
+}
+
+.cart-total{
+margin-top:20px;
+padding-top:20px;
+border-top:2px solid #e5e7eb;
+text-align:right;
+font-size:20px;
+font-weight:700;
+}
+
+.cart-total span{
+color:#81654F;
+}
+
+.empty-cart{
+text-align:center;
+padding:40px;
+color:#aaa093;
+}
+
+.modal-footer{
+padding:20px;
+border-top:1px solid #e5e7eb;
+display:flex;
+gap:10px;
+justify-content:flex-end;
+}
+
+.btn-checkout{
+background:#81654F;
+color:white;
+padding:10px 20px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+}
+
+.btn-checkout:hover{
+background:#694e3b;
+}
+
+.btn-clear{
+background:#f3ede7;
+color:#4a3728;
+padding:10px 20px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+}
+
+.btn-clear:hover{
+background:#e2d5ca;
+}
+
+/* TOAST */
+
+.toast{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#2d241a;
+color:#FCFFF9;
+padding:12px 24px;
+border-radius:30px;
+z-index:1000;
+animation:slideUp 0.3s ease;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+@keyframes slideUp{
+from{
+transform:translateY(100px);
+opacity:0;
+}
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+/* FOOTER */
+
+footer{
+background:#2d241a;
+color:#F2EBDD;
+margin-top:60px;
+padding:40px 0;
+text-align:center;
+font-weight:400;
+}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+.hero h1{
+font-size:28px;
+}
+.hero{
+padding:25px;
+}
+.cart-item{
+flex-wrap:wrap;
+}
+.cart-item-subtotal{
+margin-top:8px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container header-flex">
+
+<div class="logo">🎨 Sketchyy</div>
+
+<nav>
+<ul>
+<li><a id="nav-home">Home</a></li>
+<li><a id="nav-product">Products</a></li>
+<li><a id="nav-cart">Cart</a></li>
+</ul>
+</nav>
+
+<div class="cart-icon" id="cartIcon">
+🛒 <span id="cartCount">0</span>
+</div>
+
+</div>
+</header>
+
+<!-- MODAL KERANJANG -->
+<div id="cartModal" class="modal">
+<div class="modal-content">
+<div class="modal-header">
+<h3>🛍️ Keranjang Belanja</h3>
+<button class="close-modal">&times;</button>
+</div>
+<div class="modal-body" id="cartModalBody">
+<!-- Isi keranjang akan di-render di sini -->
+</div>
+<div class="modal-footer">
+<button class="btn-clear" id="clearCartBtn">Kosongkan</button>
+<button class="btn-checkout" id="checkoutBtn">Checkout</button>
+</div>
+</div>
+</div>
+
+
+<div class="container">
+
+<section class="hero">
+
+<div class="hero-content">
+<h1>Welcome to Sketchyy Online Store</h1>
+<p>Bring your creativity to life with our premium art supplies!!</p>
+<button class="btn-primary" id="heroBtn">Shop Now →</button>
+</div>
+
+<img class="hero-img" src="https://raw.githubusercontent.com/Kharina-xy/text-images-README.md/main/my%20sketchh.jpg" alt="Art supplies">
+
+</section>
+
+
+<section id="produk-section">
+
+<h2 class="section-title">✨ Featured Products</h2>
+
+<div class="product-grid">
+
+<div class="product-card" data-id="1" data-name="Mechanical Pencil" data-price="155500">
+<img class="product-img" src="https://raw.githubusercontent.com/Kharina-xy/text-images-README.md/main/Pensil%20Mekanik.jpeg" alt="Mechanical Pencil">
+<div class="product-info">
+<div class="product-name">✏️ Mechanical Pencil</div>
+<div class="product-price">Rp 155.500</div>
+<button class="btn-cart add">Tambah ke Keranjang</button>
+</div>
+</div>
+
+<div class="product-card" data-id="2" data-name="Eraser" data-price="40000">
+<img class="product-img" src="https://raw.githubusercontent.com/Kharina-xy/text-images-README.md/main/Eraser.png" alt="Eraser">
+<div class="product-info">
+<div class="product-name">🧽 Eraser</div>
+<div class="product-price">Rp 40.000</div>
+<button class="btn-cart add">Tambah ke Keranjang</button>
+</div>
+</div>
+
+<div class="product-card" data-id="3" data-name="Sketchbook" data-price="100000">
+<img class="product-img" src="https://raw.githubusercontent.com/Kharina-xy/text-images-README.md/main/SketchBook.png" alt="Sketchbook">
+<div class="product-info">
+<div class="product-name">📓 Sketchbook A5</div>
+<div class="product-price">Rp 100.000</div>
+<button class="btn-cart add">Tambah ke Keranjang</button>
+</div>
+</div>
+
+<div class="product-card" data-id="4" data-name="Watercolor" data-price="705500">
+<img class="product-img" src="https://raw.githubusercontent.com/Kharina-xy/text-images-README.md/main/Water%20Colour.png" alt="Watercolor">
+<div class="product-info">
+<div class="product-name">🎨 Watercolor Set</div>
+<div class="product-price">Rp 705.500</div>
+<button class="btn-cart add">Tambah ke Keranjang</button>
+</div>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Sketchyy</h4>
+                <p>Art Essentials</p>
+            </div>
+            <div class="footer-col">
+                <h4>Kontak</h4>
+                <p>📞 +62 838 5313 5082</p>
+                <p>✉️ Kharinaputri33@gmail.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Me</h4>
+                <p>Instagram: @Khaxinaa</p>
+                <p>Tiktok: @riinn_ss</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Sketchyy  E-Commerce. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script>
+
+// DATA CART
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+// DOM Elements
+const cartCountEl = document.getElementById("cartCount");
+const cartModal = document.getElementById("cartModal");
+const cartModalBody = document.getElementById("cartModalBody");
+const closeModalBtn = document.querySelector(".close-modal");
+const cartIcon = document.getElementById("cartIcon");
+const clearCartBtn = document.getElementById("clearCartBtn");
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+// UPDATE CART COUNT
+function updateCartCount(){
+let total = 0;
+for(let id in cart){
+total += cart[id].qty;
+}
+cartCountEl.innerText = total;
+localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// SHOW TOAST NOTIFICATION
+function showToast(text){
+let toast = document.createElement("div");
+toast.className = "toast";
+toast.innerText = text;
+document.body.appendChild(toast);
+setTimeout(() => toast.remove(), 1500);
+}
+
+// RENDER MODAL CART
+function renderCartModal(){
+if(Object.keys(cart).length === 0){
+cartModalBody.innerHTML = `<div class="empty-cart">🛒 Keranjang masih kosong<br><small>Yuk, belanja dulu!</small></div>`;
+return;
+}
+
+let html = "";
+let grandTotal = 0;
+
+for(let id in cart){
+let item = cart[id];
+let subtotal = item.price * item.qty;
+grandTotal += subtotal;
+
+html += `
+<div class="cart-item" data-id="${id}">
+<div class="cart-item-info">
+<div class="cart-item-name">${escapeHtml(item.name)}</div>
+<div class="cart-item-price">Rp ${item.price.toLocaleString("id-ID")}</div>
+</div>
+<div class="cart-item-qty">
+<button class="qty-btn minus" data-id="${id}">-</button>
+<span>${item.qty}</span>
+<button class="qty-btn plus" data-id="${id}">+</button>
+</div>
+<div class="cart-item-subtotal">
+Rp ${subtotal.toLocaleString("id-ID")}
+</div>
+<button class="delete-item" data-id="${id}">🗑️ Hapus</button>
+</div>
+`;
+}
+
+html += `
+<div class="cart-total">
+Total: <span>Rp ${grandTotal.toLocaleString("id-ID")}</span>
+</div>
+`;
+
+cartModalBody.innerHTML = html;
+
+// Attach event listeners untuk tombol di modal
+document.querySelectorAll(".minus").forEach(btn => {
+btn.onclick = () => changeQuantity(btn.dataset.id, -1);
+});
+document.querySelectorAll(".plus").forEach(btn => {
+btn.onclick = () => changeQuantity(btn.dataset.id, 1);
+});
+document.querySelectorAll(".delete-item").forEach(btn => {
+btn.onclick = () => deleteCartItem(btn.dataset.id);
+});
+}
+
+// simple escape untuk mencegah XSS
+function escapeHtml(str) {
+return str.replace(/[&<>]/g, function(m) {
+if(m === '&') return '&amp;';
+if(m === '<') return '&lt;';
+if(m === '>') return '&gt;';
+return m;
+});
+}
+
+// CHANGE QUANTITY
+function changeQuantity(id, delta){
+if(!cart[id]) return;
+let newQty = cart[id].qty + delta;
+if(newQty <= 0){
+deleteCartItem(id);
+} else {
+cart[id].qty = newQty;
+updateCartCount();
+renderCartModal();
+showToast(`Jumlah ${cart[id].name} diubah`);
+}
+}
+
+// DELETE CART ITEM
+function deleteCartItem(id){
+let itemName = cart[id]?.name;
+delete cart[id];
+updateCartCount();
+renderCartModal();
+showToast(`${itemName} dihapus dari keranjang`);
+}
+
+// CLEAR ALL CART
+function clearCart(){
+if(Object.keys(cart).length === 0){
+showToast("Keranjang sudah kosong");
+return;
+}
+cart = {};
+updateCartCount();
+renderCartModal();
+showToast("Keranjang dikosongkan");
+}
+
+// CHECKOUT
+function checkout(){
+if(Object.keys(cart).length === 0){
+showToast("Keranjang masih kosong, yuk belanja dulu!");
+return;
+}
+
+let text = "🧾 DETAIL BELANJA\n\n";
+let total = 0;
+
+for(let id in cart){
+let item = cart[id];
+let sub = item.price * item.qty;
+text += `📦 ${item.name} x${item.qty} = Rp ${sub.toLocaleString("id-ID")}\n`;
+total += sub;
+}
+
+text += `\n${"=".repeat(30)}`;
+text += `\n💰 TOTAL: Rp ${total.toLocaleString("id-ID")}`;
+text += `\n\nTerima kasih sudah berbelanja di Sketchyy! ✨`;
+
+alert(text);
+}
+
+// OPEN MODAL
+function openCartModal(){
+renderCartModal();
+cartModal.style.display = "flex";
+}
+
+// CLOSE MODAL
+function closeModal(){
+cartModal.style.display = "none";
+}
+
+// TAMBAH KE KERANJANG
+document.querySelectorAll(".add").forEach(btn => {
+btn.onclick = function(){
+let card = this.closest(".product-card");
+let id = card.dataset.id;
+let name = card.dataset.name;
+let price = parseInt(card.dataset.price);
+
+if(!cart[id]){
+cart[id] = {name: name, price: price, qty: 1};
+} else {
+cart[id].qty++;
+}
+
+updateCartCount();
+showToast(`✓ ${name} ditambahkan ke keranjang`);
+};
+});
+
+// NAVIGATION
+document.getElementById("heroBtn").onclick = () => {
+document.getElementById("produk-section").scrollIntoView({behavior: "smooth"});
+};
+
+document.getElementById("nav-product").onclick = (e) => {
+e.preventDefault();
+document.getElementById("produk-section").scrollIntoView({behavior: "smooth"});
+};
+
+document.getElementById("nav-home").onclick = (e) => {
+e.preventDefault();
+window.scrollTo({top: 0, behavior: "smooth"});
+};
+
+document.getElementById("nav-cart").onclick = (e) => {
+e.preventDefault();
+openCartModal();
+};
+
+cartIcon.onclick = openCartModal;
+closeModalBtn.onclick = closeModal;
+clearCartBtn.onclick = clearCart;
+checkoutBtn.onclick = checkout;
+
+// CLICK OUTSIDE MODAL TO CLOSE
+window.onclick = (e) => {
+if(e.target === cartModal){
+closeModal();
+}
+};
+
+// INITIAL
+updateCartCount();
+
+</script>
+
+</body>
+</html>
